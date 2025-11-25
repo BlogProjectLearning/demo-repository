@@ -107,7 +107,7 @@
     <!-- Tela de boas-vindas -->
     <div id="welcomeModal" class="welcome-modal">
         <div class="modal-content">
-            <img src="img/logo.png" class="welcome-img" alt="Logo">
+            <img src="https://media.tenor.com/au_fJBrNy3QAAAAm/finch-finch-care.webp" class="welcome-img" alt="Logo">
 
             <h2>Bem-vindo ao Project Learning</h2>
             <p id="welcomePhrase"></p>
@@ -163,38 +163,135 @@
             }
         }
     </style>
-        <script>
-         document.addEventListener("DOMContentLoaded", ()=> {
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
 
-                // FRases aleatórias
-                const frases = [
-                    "O sucesso nasce do querer — Napoleon Hill",
-                    "A persistência é o caminho do êxito — Charles Chaplin",
-                    "A jornada é tão importante quanto o destino — Confúcio",
-                    "A educação transforma vidas — Paulo Freire"
-                ];
+            // FRases aleatórias
+            const frases = [
+                "O sucesso nasce do querer — Napoleon Hill",
+                "A persistência é o caminho do êxito — Charles Chaplin",
+                "A jornada é tão importante quanto o destino — Confúcio",
+                "A educação transforma vidas — Paulo Freire",
 
-                // VERIFICA se a tela já foi mostrada nesta sessão
-                if (!sessionStorage.getItem("welcomeShown")) {
+                "Acredite no poder dos pequenos passos — Autor desconhecido",
+                "O futuro pertence a quem se prepara hoje — Malcolm X",
+                "Coragem é saber que pode não dar certo e tentar mesmo assim — Mark Twain",
+                "Você é mais forte do que imagina — Autor desconhecido",
+                "Nada muda se você não mudar — Autor desconhecido",
+                "Grandes resultados exigem grandes esforços — Eurípedes",
+                "Você não precisa ser perfeito, basta ser constante — Autor desconhecido",
+                "Quando você acredita, tudo se torna possível — Autor desconhecido",
+                "A disciplina é a ponte entre metas e realizações — Jim Rohn",
+                "A ação é a chave para todo sucesso — Pablo Picasso",
+                "O fracasso é apenas a oportunidade de recomeçar com mais inteligência — Henry Ford",
+                "Nunca é tarde para ser quem você poderia ter sido — George Eliot",
+                "O impossível é apenas uma opinião — Paulo Coelho",
+                "Sua única limitação é você mesmo — Autor desconhecido",
+                "Seja a mudança que você deseja ver no mundo — Gandhi",
+                "Nenhum mar calmo fez um bom marinheiro — Franklin Roosevelt",
+                "Amar o que você faz é o início de tudo — Steve Jobs",
+                "Persistir é transformar sonhos em realidade — Autor desconhecido",
+                "Você só fracassa quando desiste — Autor desconhecido",
+                "Não espere por oportunidades, crie-as — George Bernard Shaw",
+                "O que você faz hoje pode melhorar todos os seus amanhãs — Ralph Marston",
+                "Tudo parece impossível até que seja feito — Nelson Mandela",
+                "O sucesso é a soma de pequenos esforços diários — Robert Collier",
+                "A melhor forma de prever o futuro é criá-lo — Peter Drucker",
+                "Não tenha medo de ir devagar; tenha medo de parar — Provérbio Chinês",
+                "Sonhos grandes dão trabalho, mas também dão sentido — Autor desconhecido",
+                "Você nasceu para vencer — Autor desconhecido",
+                "A mente é tudo. Você se torna aquilo que pensa — Buda",
+                "Se você quer resultados diferentes, faça algo diferente — Albert Einstein",
+                "Você não precisa ver a escada inteira, apenas o primeiro passo — Martin Luther King Jr.",
+                "Quem enfrenta desafios cresce — Autor desconhecido",
+                "A força cresce na dificuldade — Autor desconhecido",
+                "Nunca desista daquilo que você não passa um dia sem pensar — Winston Churchill",
+                "A motivação te inicia; o hábito te mantém — Zig Ziglar",
+                "Você não veio até aqui só para chegar até aqui — Autor desconhecido",
+                "Cada dia é uma nova chance — Autor desconhecido",
+                "Não deixe seu medo decidir seu futuro — Shalane Flanagan",
+                "Trabalhe em silêncio, deixe o sucesso fazer barulho — Frank Ocean",
+                "Nada é tão nosso quanto nossos sonhos — Nietzsche",
+                "Faça o melhor que puder, onde estiver, com o que tiver — Theodore Roosevelt",
+                "Vença a si mesmo e vencerá qualquer desafio — Platão",
+                "A vida começa onde sua zona de conforto termina — Neale Donald Walsch",
+                "O esforço de hoje é a vitória de amanhã — Autor desconhecido",
+                "Não pare até se orgulhar — Autor desconhecido",
+                "A persistência realiza o impossível — Provérbio Chinês",
+                "Grandes coisas levam tempo — Autor desconhecido",
+                "Deus honra quem não desiste — Autor desconhecido",
+                "Seu foco determina sua realidade — George Lucas",
+                "Fracassar não é o fim; é a chance de recomeçar — Autor desconhecido",
+                "Ninguém é pequeno demais para sonhar grande — Autor desconhecido",
+                "O segredo do sucesso é começar — Mark Twain",
+                "A vida recompensa quem tem coragem — Autor desconhecido",
+                "Você é a sua única concorrência — Autor desconhecido",
+                "A chave para mudar o mundo é começar por você — Sócrates",
+                "Tudo o que você quer está do outro lado do medo — Jack Canfield",
+                "Não coloque limite nos seus sonhos — Autor desconhecido",
+                "Acredite no processo — Autor desconhecido",
+                "Plante hoje o que deseja colher amanhã — Autor desconhecido",
+                "A vitória começa na mente — Autor desconhecido",
+                "Você pode tudo, basta começar — Autor desconhecido",
+                "O primeiro passo é o mais importante — Autor desconhecido",
+                "A vida é feita de escolhas — Autor desconhecido",
+                "Não compare seu capítulo 1 com o capítulo 20 de outra pessoa — Autor desconhecido",
+                "Quem tenta pode falhar; quem não tenta já falhou — Autor desconhecido",
+                "Dificuldades preparam pessoas comuns para destinos extraordinários — C.S. Lewis",
+                "Concentre-se no que você pode controlar — Autor desconhecido",
+                "Não tenha medo da mudança — Autor desconhecido",
+                "A vitória exige esforços invisíveis — Autor desconhecido",
+                "Seja firme, mas não duro consigo mesmo — Autor desconhecido",
+                "A vida recompensa a coragem — Autor desconhecido",
+                "Tudo começa com um passo — Autor desconhecido",
+                "Foque no progresso, não na perfeição — Autor desconhecido",
+                "Você é capaz de mais do que imagina — Autor desconhecido",
+                "O sucesso gosta de silêncio — Autor desconhecido",
+                "O amanhã é consequência do hoje — Autor desconhecido",
+                "Persistir é o diferencial dos vencedores — Autor desconhecido",
+                "Grandes sonhos exigem grandes decisões — Autor desconhecido",
+                "Sempre existe uma nova chance — Autor desconhecido",
+                "Acredite que você pode — Autor desconhecido",
+                "Não importa a velocidade, importa o movimento — Autor desconhecido",
+                "Quem aprende, cresce — Autor desconhecido",
+                "A perfeição é inimiga do progresso — Winston Churchill",
+                "Você é responsável pelo que cativa — Antoine de Saint-Exupéry",
+                "Siga firme; o resultado vem — Autor desconhecido",
+                "O que você busca também te busca — Rumi",
+                "A vida é feita de coragem — Guimarães Rosa",
+                "Só vence quem não desiste — Autor desconhecido",
+                "Você não é definido por seus erros — Autor desconhecido",
+                "O foco cria a realidade — Autor desconhecido",
+                "A disciplina vence o talento — Autor desconhecido",
+                "Não existe vitória sem luta — Autor desconhecido",
+                "Quem sonha, realiza — Autor desconhecido",
+                "Faça hoje, não amanhã — Autor desconhecido"
+            ];
 
-                    const modal = document.getElementById("welcomeModal");
-                    const phrase = document.getElementById("welcomePhrase");
 
-                    // frase aleatória
-                    phrase.textContent = frases[Math.floor(Math.random() * frases.length)];
 
-                    // mostrar
-                    modal.classList.add("show");
 
-                    // desaparecer depois de 3s
-                    setTimeout(() => {
-                        modal.classList.remove("show");
-                    }, 3000);
+            // VERIFICA se a tela já foi mostrada nesta sessão
+            if (!sessionStorage.getItem("welcomeShown")) {
 
-                    // marcar como exibido nesta sessão
-                    sessionStorage.setItem("welcomeShown", "true");
-                }
-            });
+                const modal = document.getElementById("welcomeModal");
+                const phrase = document.getElementById("welcomePhrase");
+
+                // frase aleatória
+                phrase.textContent = frases[Math.floor(Math.random() * frases.length)];
+
+                // mostrar
+                modal.classList.add("show");
+
+                // desaparecer depois de 3s
+                setTimeout(() => {
+                    modal.classList.remove("show");
+                }, 3000);
+
+                // marcar como exibido nesta sessão
+                sessionStorage.setItem("welcomeShown", "true");
+            }
+        });
     </script>
 
 
