@@ -7,10 +7,10 @@
     <title>Project Learning</title>
     <link rel="stylesheet" href="./src/css/footer.css">
     <!-- Incluindo Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" 
-          rel="stylesheet">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <!-- iniciando o body-->
+
 <body class="d-flex flex-column min-vh-100">
 
     <!-- Navbar -->
@@ -18,9 +18,8 @@
         <div class="container-fluid">
             <a class="navbar-brand" href="#">Project Learning</a>
 
-            <button class="navbar-toggler" type="button" data-bs-toggle="collapse"
-                data-bs-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup"
-                aria-expanded="false" aria-label="Toggle navigation">
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavAltMarkup"
+                aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
             </button>
 
@@ -41,13 +40,14 @@
                 <div class="card mb-3">
                     <div class="row g-3 align-items-center">
                         <div class="col-md-5">
-                            <img src="#" class="" >
+                            <img src="#" class="">
                         </div>
                         <div class="col-md-7">
                             <div class="card-body">
                                 <h2 class="card-title">Título do Post Principal</h2>
                                 <p class="text-muted small">Categoria: 24 de novembro de 2025</p>
-                                <p class="card-text">Resumo pequeno do Post pra o leitor se interessar e instalar um trojan furtivamente pra minerar bitcoins.</p>
+                                <p class="card-text">Resumo pequeno do Post pra o leitor se interessar e instalar um
+                                    trojan furtivamente pra minerar bitcoins.</p>
                                 <a href="#" class="btn btn-primary">Ler mais</a>
                             </div>
                         </div>
@@ -57,7 +57,7 @@
 
             <!-- Sidebar: posts secundarios -->
             <aside class="col-10 col-lg-3">
-                <div class="d-grid gap-3"> 
+                <div class="d-grid gap-3">
                     <div class="card">
                         <div class="row g-0 align-items-center">
                             <div class="col-4">
@@ -103,14 +103,159 @@
             </aside>
         </div>
     </main>
+    <!-- Seja bem-vindo -->
+    <!-- OVERLAY DE BOAS-VINDAS -->
+    <div id="welcome-overlay">
+        <div class="welcome-box">
+            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Circle-icons-computer.svg"
+                class="welcome-logo">
+
+            <h1 class="welcome-title">Project Learning</h1>
+            <p id="typing-text" class="welcome-typing"></p>
+            <p id="welcome-quote" class="welcome-quote"></p>
+        </div>
+    </div>
+
+    <style>
+        /* TELA BLOQUEANDO TUDO */
+        #welcome-overlay {
+            position: fixed;
+            inset: 0;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: blur(10px);
+            background: rgba(0, 0, 0, 0.45);
+            z-index: 999999;
+
+            opacity: 0;
+            pointer-events: none;
+            transition: opacity .9s ease-in-out;
+        }
+
+        /* CAIXA CENTRAL */
+        .welcome-box {
+            background: white;
+            padding: 40px 50px;
+            border-radius: 25px;
+            text-align: center;
+            width: 420px;
+            box-shadow: 0 10px 60px rgba(0, 0, 0, .25);
+
+            opacity: 0;
+            transform: translateY(20px) scale(.95);
+            animation: boxEnter .9s ease forwards .2s;
+        }
+
+        @keyframes boxEnter {
+            to {
+                opacity: 1;
+                transform: translateY(0) scale(1);
+            }
+        }
+
+        /* LOGO ANIMADA */
+        .welcome-logo {
+            width: 90px;
+            margin-bottom: 15px;
+            animation: logoZoom 1.2s ease forwards;
+        }
+
+        @keyframes logoZoom {
+            from {
+                transform: scale(.6);
+                opacity: 0;
+            }
+
+            to {
+                transform: scale(1);
+                opacity: 1;
+            }
+        }
+
+        .welcome-title {
+            font-size: 28px;
+            margin: 10px 0 5px;
+            font-weight: bold;
+            color: #333;
+        }
+
+        /* TEXTO DIGITADO */
+        .welcome-typing {
+            font-size: 16px;
+            min-height: 22px;
+            margin-bottom: 10px;
+            font-family: "Courier New";
+            color: #444;
+        }
+
+        .welcome-quote {
+            font-style: italic;
+            color: #666;
+            margin-top: 8px;
+        }
+    </style>
+
+    <script>
+        /* ======== FRASES ROTATIVAS ======== */
+        const frases = [
+            "“A educação é a arma mais poderosa que você pode usar para mudar o mundo.” — Mandela",
+            "“A persistência transforma o impossível.” — Provérbio Chinês",
+            "“O sucesso é a soma de pequenos esforços repetidos diariamente.” — Collier",
+            "“A mente que se abre a uma nova ideia jamais volta ao seu tamanho original.” — Einstein"
+        ];
+
+        let fraseIndex = localStorage.getItem("fraseIndex") || 0;
+        document.getElementById("welcome-quote").innerText = frases[fraseIndex];
+        fraseIndex = (parseInt(fraseIndex) + 1) % frases.length;
+        localStorage.setItem("fraseIndex", fraseIndex);
+
+        /* ======== EFEITO DE DIGITAÇÃO ======== */
+        const typingText = "Bem-vindo ao futuro da aprendizagem!";
+        let index = 0;
+
+        function typeWriter() {
+            if (index < typingText.length) {
+                document.getElementById("typing-text").textContent += typingText.charAt(index);
+                index++;
+                setTimeout(typeWriter, 40);
+            }
+        }
+
+        /* ======== LÓGICA DE PRIMEIRA VEZ ======== */
+        const overlay = document.getElementById("welcome-overlay");
+        const jaApareceu = localStorage.getItem("welcomeShown_v2");
+
+        if (!jaApareceu) {
+            overlay.style.opacity = "1";
+            overlay.style.pointerEvents = "auto";
+
+            typeWriter(); // inicia o texto digitado
+
+            setTimeout(() => {
+                overlay.style.opacity = "0";
+
+                setTimeout(() => {
+                    overlay.remove();
+                }, 900);
+
+            }, 3500); // fica por 3.5 segundos
+
+            localStorage.setItem("welcomeShown_v2", "true");
+        }
+    </script>
+
 
     <!-- Footer -->
-    <footer class="bg-light text-dark text-center py-3 mt-auto" >
-        <p class="mb-0">© 2025 - Project Leaning. Todos os direitos reservados - <a  href="https://github.com/samuel123d/">Samuel123d</a> | <a href="https://github.com/joaopaul0dev">joaopaul0dev  </a></p>
+    <footer class="bg-light text-dark text-center py-3 mt-auto">
+        <p class="mb-0">© 2025 - Project Leaning. Todos os direitos reservados - <a
+                href="https://github.com/samuel123d/">Samuel123d</a> | <a
+                href="https://github.com/joaopaul0dev">joaopaul0dev </a></p>
     </footer>
 
     <!-- Bootstrap JS (bundle com Popper incluso — necessário para o sandwich) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.8/dist/js/bootstrap.bundle.min.js"></script>
 
 </body>
+
 </html>
