@@ -104,145 +104,97 @@
         </div>
     </main>
     <!-- Seja bem-vindo -->
-    <!-- OVERLAY DE BOAS-VINDAS -->
-    <div id="welcome-overlay">
-        <div class="welcome-box">
-            <img src="https://upload.wikimedia.org/wikipedia/commons/3/3a/Circle-icons-computer.svg"
-                class="welcome-logo">
+    <!-- Tela de boas-vindas -->
+    <div id="welcomeModal" class="welcome-modal">
+        <div class="modal-content">
+            <img src="img/logo.png" class="welcome-img" alt="Logo">
 
-            <h1 class="welcome-title">Project Learning</h1>
-            <p id="typing-text" class="welcome-typing"></p>
-            <p id="welcome-quote" class="welcome-quote"></p>
+            <h2>Bem-vindo ao Project Learning</h2>
+            <p id="welcomePhrase"></p>
         </div>
     </div>
-
     <style>
-        /* TELA BLOQUEANDO TUDO */
-        #welcome-overlay {
+        .welcome-modal {
             position: fixed;
-            inset: 0;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            backdrop-filter: blur(8px);
             display: flex;
             justify-content: center;
             align-items: center;
-            backdrop-filter: blur(10px);
-            background: rgba(0, 0, 0, 0.45);
-            z-index: 999999;
-
             opacity: 0;
-            pointer-events: none;
-            transition: opacity .9s ease-in-out;
+            visibility: hidden;
+            transition: opacity 1s ease;
+            z-index: 9999;
         }
 
-        /* CAIXA CENTRAL */
-        .welcome-box {
+        .welcome-modal.show {
+            opacity: 1;
+            visibility: visible;
+        }
+
+        .modal-content {
             background: white;
-            padding: 40px 50px;
-            border-radius: 25px;
+            padding: 30px;
             text-align: center;
-            width: 420px;
-            box-shadow: 0 10px 60px rgba(0, 0, 0, .25);
-
-            opacity: 0;
-            transform: translateY(20px) scale(.95);
-            animation: boxEnter .9s ease forwards .2s;
+            border-radius: 15px;
+            max-width: 350px;
+            animation: fadeIn 1.5s ease;
         }
 
-        @keyframes boxEnter {
-            to {
-                opacity: 1;
-                transform: translateY(0) scale(1);
-            }
-        }
-
-        /* LOGO ANIMADA */
-        .welcome-logo {
-            width: 90px;
+        .welcome-img {
+            width: 120px;
             margin-bottom: 15px;
-            animation: logoZoom 1.2s ease forwards;
+            border-radius: 10px;
         }
 
-        @keyframes logoZoom {
+        @keyframes fadeIn {
             from {
-                transform: scale(.6);
+                transform: translateY(40px);
                 opacity: 0;
             }
 
             to {
-                transform: scale(1);
+                transform: translateY(0);
                 opacity: 1;
             }
         }
-
-        .welcome-title {
-            font-size: 28px;
-            margin: 10px 0 5px;
-            font-weight: bold;
-            color: #333;
-        }
-
-        /* TEXTO DIGITADO */
-        .welcome-typing {
-            font-size: 16px;
-            min-height: 22px;
-            margin-bottom: 10px;
-            font-family: "Courier New";
-            color: #444;
-        }
-
-        .welcome-quote {
-            font-style: italic;
-            color: #666;
-            margin-top: 8px;
-        }
     </style>
+        <script>
+         document.addEventListener("DOMContentLoaded", ()=> {
 
-    <script>
-        /* ======== FRASES ROTATIVAS ======== */
-        const frases = [
-            "“A educação é a arma mais poderosa que você pode usar para mudar o mundo.” — Mandela",
-            "“A persistência transforma o impossível.” — Provérbio Chinês",
-            "“O sucesso é a soma de pequenos esforços repetidos diariamente.” — Collier",
-            "“A mente que se abre a uma nova ideia jamais volta ao seu tamanho original.” — Einstein"
-        ];
+                // FRases aleatórias
+                const frases = [
+                    "O sucesso nasce do querer — Napoleon Hill",
+                    "A persistência é o caminho do êxito — Charles Chaplin",
+                    "A jornada é tão importante quanto o destino — Confúcio",
+                    "A educação transforma vidas — Paulo Freire"
+                ];
 
-        let fraseIndex = localStorage.getItem("fraseIndex") || 0;
-        document.getElementById("welcome-quote").innerText = frases[fraseIndex];
-        fraseIndex = (parseInt(fraseIndex) + 1) % frases.length;
-        localStorage.setItem("fraseIndex", fraseIndex);
+                // VERIFICA se a tela já foi mostrada nesta sessão
+                if (!sessionStorage.getItem("welcomeShown")) {
 
-        /* ======== EFEITO DE DIGITAÇÃO ======== */
-        const typingText = "Bem-vindo ao futuro da aprendizagem!";
-        let index = 0;
+                    const modal = document.getElementById("welcomeModal");
+                    const phrase = document.getElementById("welcomePhrase");
 
-        function typeWriter() {
-            if (index < typingText.length) {
-                document.getElementById("typing-text").textContent += typingText.charAt(index);
-                index++;
-                setTimeout(typeWriter, 40);
-            }
-        }
+                    // frase aleatória
+                    phrase.textContent = frases[Math.floor(Math.random() * frases.length)];
 
-        /* ======== LÓGICA DE PRIMEIRA VEZ ======== */
-        const overlay = document.getElementById("welcome-overlay");
-        const jaApareceu = localStorage.getItem("welcomeShown_v2");
+                    // mostrar
+                    modal.classList.add("show");
 
-        if (!jaApareceu) {
-            overlay.style.opacity = "1";
-            overlay.style.pointerEvents = "auto";
+                    // desaparecer depois de 3s
+                    setTimeout(() => {
+                        modal.classList.remove("show");
+                    }, 3000);
 
-            typeWriter(); // inicia o texto digitado
-
-            setTimeout(() => {
-                overlay.style.opacity = "0";
-
-                setTimeout(() => {
-                    overlay.remove();
-                }, 900);
-
-            }, 3500); // fica por 3.5 segundos
-
-            localStorage.setItem("welcomeShown_v2", "true");
-        }
+                    // marcar como exibido nesta sessão
+                    sessionStorage.setItem("welcomeShown", "true");
+                }
+            });
     </script>
 
 
